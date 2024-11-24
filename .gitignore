@@ -1,0 +1,15 @@
+# IDE/Code Editor Specific
+.vs/
+.vscode/
+
+# Binary Outputs
+Binaries/
+Binaries-Int/
+!Vendor/Premake/Binaries/
+
+# Generated Project Files
+*.sln
+*.vcxproj*
+/Makefile
+**/Makefile
+*.mk
