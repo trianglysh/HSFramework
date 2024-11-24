@@ -39,7 +39,7 @@ namespace HSFramework
 			IMPLEMENT_SWITCH_CASE_FOR_MST(Splash);
 			IMPLEMENT_SWITCH_CASE_FOR_MST(Menu);
 		#undef IMPLEMENT_SWITCH_CASE_FOR_MST
-		default: m_ActiveManager = nullptr;
+		default: m_ActiveManager = nullptr; break;
 		}
 
 		if (m_ActiveManager)
