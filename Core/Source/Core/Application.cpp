@@ -9,6 +9,7 @@ namespace HSFramework
 	Application::Application(const CommandLineArgs& args)
 		: m_Args(args)
 	{
+		HS_CORE_ASSERT(!s_Instance, "An application instance alredy exists!");
 		s_Instance = this;
 	}
 

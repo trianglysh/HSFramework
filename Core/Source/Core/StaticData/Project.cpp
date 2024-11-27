@@ -7,10 +7,12 @@ namespace HSFramework
 {
 	bool Project::LoadFromFile(std::string_view filepath)
 	{
+		HS_CORE_TRACE("Loading project from file '{}'...", filepath);
+
 		std::ifstream file(filepath.data());
 		if (!file)
 		{
-			// TODO: Log this
+			HS_CORE_ERROR("Project load failed, the file stream failed to open.");
 			return false;
 		}
 
@@ -21,7 +23,7 @@ namespace HSFramework
 		}
 		catch (const std::exception& e)
 		{
-			// TODO: Log this
+			HS_CORE_ERROR("Error whilst parsing project JSON file:\n{}", e.what());
 			return false;
 		}
 		ActiveProject = MakeScope<Project>();
@@ -69,6 +71,7 @@ namespace HSFramework
 			}
 		}
 
+		HS_CORE_INFO("Project '{}' ({}) successfully loaded!", ActiveProject->Name, ActiveProject->Abb);
 		return true;
 	}
 }

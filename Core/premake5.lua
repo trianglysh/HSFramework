@@ -18,14 +18,22 @@ project "Core"
 	includedirs
 	{
 		"Source",
-		"%{IncludeDir.jsoncpp}"
+
+		"%{IncludeDir.jsoncpp}",
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.fmtlib}",
+		"%{IncludeDir.glm}"
 	}
 	
 	filter "system:windows"
 		systemversion "latest"
 		defines
 		{
-			"HS_PLATFORM_WINDOWS"
+			"HS_PLATFORM_WINDOWS",
+
+			-- MSVC bullshit
+			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING",
+			"_CRT_SECURE_NO_WARNINGS"
 		}
 		excludes
 		{

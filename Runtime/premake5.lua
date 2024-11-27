@@ -17,7 +17,12 @@ project "Runtime"
 	includedirs
 	{
 		"%{IncludeDir.Core}",
-		"Source"
+		"Source",
+
+		"%{IncludeDir.jsoncpp}",
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.fmtlib}",
+		"%{IncludeDir.glm}"
 	}
 	
 	links
@@ -32,7 +37,11 @@ project "Runtime"
 		systemversion "latest"
 		defines
 		{
-			"HS_PLATFORM_WINDOWS"
+			"HS_PLATFORM_WINDOWS",
+
+			-- MSVC bullshit
+			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING",
+			"_CRT_SECURE_NO_WARNINGS"
 		}
 	
 	filter "system:linux"

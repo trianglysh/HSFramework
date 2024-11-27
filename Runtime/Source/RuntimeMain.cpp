@@ -2,11 +2,15 @@
 
 #include "Core/Application.h"
 #include "Core/StaticData/Project.h"
+#include "Core/Log.h"
 
 namespace HSFramework::Runtime
 {
 	int RtMain(int argc, char** argv)
 	{
+		Log::Init();
+		HS_RUNTIME_INFO("Initialized logging.");
+
 		// Cannot make this string_view because the current directory check stage's string would go out of scope by the time this variable is referred to.
 		std::string projectFilePath;
 
@@ -16,7 +20,7 @@ namespace HSFramework::Runtime
 
 			if (!std::filesystem::is_regular_file(projectFilePath))
 			{
-				// TODO: Log this
+				HS_RUNTIME_FATAL("The specified project filepath '{}' via the command line arguments doesn't resolve into a valid regular file system file.", projectFilePath);
 				return EXIT_FAILURE;
 			}
 
@@ -25,7 +29,7 @@ namespace HSFramework::Runtime
 		}
 		else if (argc > 2)
 		{
-			// TODO: Log this
+			HS_RUNTIME_FATAL("HSFramework Runtime only accepts a maximum of one command line argument (excluding execute path) that can only specify the project file to load.");
 			return EXIT_FAILURE;
 		}
 		else
@@ -56,14 +60,14 @@ namespace HSFramework::Runtime
 
 			if (projectFilePath.empty())
 			{
-				// TODO: Error out
+				HS_RUNTIME_FATAL("No project files found in the current working directory!");
 				return EXIT_FAILURE;
 			}
 		}
 
 		if (!Project::LoadFromFile(projectFilePath))
 		{
-			// TODO: Log this
+			HS_RUNTIME_FATAL("Project load failed, terminating program.");
 			return EXIT_FAILURE;
 		}
 

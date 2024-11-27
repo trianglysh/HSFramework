@@ -1,5 +1,8 @@
 #pragma once
 
+// This header comes with "Core/Log.h" as well, no need to re-include or pre-include in this PCH.
+#include "Core/Assert.h"
+
 #ifdef HS_PLATFORM_WINDOWS
 	#include <Windows.h>
 #elif defined HS_PLATFORM_LINUX

@@ -12,6 +12,9 @@ IncludeDir = {}
 IncludeDir["Core"] = "%{ProjectDir.Core}/Source"
 IncludeDir["Runtime"] = "%{ProjectDir.Runtime}/Source"
 IncludeDir["jsoncpp"] = "%{ProjectDir.jsoncpp}/include"
+IncludeDir["fmtlib"] = "%{wks.location}/Vendor/fmtlib/include"
+IncludeDir["spdlog"] = "%{wks.location}/Vendor/spdlog/include"
+IncludeDir["glm"] = "%{wks.location}/vendor/glm"
 
 SourceDir = {}
 SourceDir["Core"] = "%{IncludeDir.Core}"
