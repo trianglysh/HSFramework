@@ -27,11 +27,19 @@ project "Core"
 		{
 			"HS_PLATFORM_WINDOWS"
 		}
+		excludes
+		{
+			"Source/Platform/Linux/**.cpp"
+		}
 	
 	filter "system:linux"
 		defines
 		{
 			"HS_PLATFORM_LINUX"
+		}
+		excludes
+		{
+			"Source/Platform/Windows/**.cpp"
 		}
 	
 	filter "configurations:Development"
