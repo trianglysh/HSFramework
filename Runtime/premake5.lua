@@ -22,7 +22,10 @@ project "Runtime"
 	
 	links
 	{
-		"Core"
+		"Core",
+
+		-- Vendors
+		"jsoncpp"
 	}
 	
 	filter "system:windows"
@@ -67,4 +70,3 @@ project "Runtime"
 			"HS_SHIPPING",
 			"HS_RUNTIME_RELEASE"
 		}
-	

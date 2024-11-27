@@ -17,7 +17,8 @@ project "Core"
 	
 	includedirs
 	{
-		"Source"
+		"Source",
+		"%{IncludeDir.jsoncpp}"
 	}
 	
 	filter "system:windows"
@@ -59,4 +60,3 @@ project "Core"
 			"HS_SHIPPING",
 			"HS_RUNTIME_RELEASE"
 		}
-	

@@ -1,0 +1,3 @@
+[submodule "Vendor/jsoncpp"]
+	path = Vendor/jsoncpp
+	url = https://github.com/trianglysh/jsoncpp

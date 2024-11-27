@@ -6,11 +6,14 @@ OutputDir["Intermediates"] = "%{wks.location}/Binaries-Int/%{OutputDir._Complete
 ProjectDir = {}
 ProjectDir["Core"] = "%{wks.location}/Core"
 ProjectDir["Runtime"] = "%{wks.location}/Runtime"
+ProjectDir["jsoncpp"] = "%{wks.location}/Vendor/jsoncpp"
 
 IncludeDir = {}
 IncludeDir["Core"] = "%{ProjectDir.Core}/Source"
 IncludeDir["Runtime"] = "%{ProjectDir.Runtime}/Source"
+IncludeDir["jsoncpp"] = "%{ProjectDir.jsoncpp}/include"
 
 SourceDir = {}
 SourceDir["Core"] = "%{IncludeDir.Core}"
 SourceDir["Runtime"] = "%{IncludeDir.Runtime}"
+SourceDir["jsoncpp"] = "%{ProjectDir.jsoncpp}/src"
