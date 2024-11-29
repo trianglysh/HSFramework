@@ -59,6 +59,8 @@ namespace HSFramework
 		static bool IsResizable() { return s_Props.Resizable; }
 		static bool IsFullscreen() { return s_Props.Fullscreen; }
 		static bool IsVSync() { return s_Props.VSync; }
+
+		static GLFWwindow* GetHandle() { return s_Handle; }
 	private:
 		inline static WindowProps s_Props;
 		inline static GLFWwindow* s_Handle = nullptr;
