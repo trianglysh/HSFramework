@@ -11,6 +11,8 @@ workspace "HSFramework"
 include "Dependencies.lua"
 
 group "Vendor"
+	include "Vendor/GLFW"
+	include "Vendor/Glad"
 	include "Vendor/jsoncpp"
 group ""
 

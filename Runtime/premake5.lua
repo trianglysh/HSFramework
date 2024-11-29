@@ -30,6 +30,8 @@ project "Runtime"
 		"Core",
 
 		-- Vendors
+		"GLFW",
+		"Glad",
 		"jsoncpp"
 	}
 	

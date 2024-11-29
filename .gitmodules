@@ -10,3 +10,6 @@
 [submodule "Vendor/fmtlib"]
 	path = Vendor/fmtlib
 	url = https://github.com/trianglysh/fmtlib
+[submodule "Vendor/Glad"]
+	path = Vendor/Glad
+	url = https://github.com/trianglysh/glad

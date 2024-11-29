@@ -19,6 +19,8 @@ project "Core"
 	{
 		"Source",
 
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
 		"%{IncludeDir.jsoncpp}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.fmtlib}",

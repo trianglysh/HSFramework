@@ -4,20 +4,39 @@
 #include "Core/Managers/SplashManager.h"
 #include "Core/Managers/MenuManager.h"
 
+#include "Core/StaticData/Project.h"
+
 namespace HSFramework
 {
 	Application::Application(const CommandLineArgs& args)
 		: m_Args(args)
 	{
+		HS_CORE_ASSERT(Project::ActiveProject, "The project hasn't been set up yet, it must be loaded before the construction of the Application!");
 		HS_CORE_ASSERT(!s_Instance, "An application instance alredy exists!");
 		s_Instance = this;
+
+		WindowProps props =
+		{
+			Project::ActiveProject->MainWindowInfo.Title,
+			Project::ActiveProject->MainWindowInfo.xSize,
+			Project::ActiveProject->MainWindowInfo.ySize,
+			Project::ActiveProject->MainWindowInfo.Resizable,
+			Project::ActiveProject->MainWindowInfo.Fullscreen,
+			Project::ActiveProject->MainWindowInfo.vSync,
+		};
+		if (!Window::Init(props))
+		{
+			HS_CORE_FATAL("Main window creation failure!");
+		}
 	}
 
 	Application::~Application()
 	{
+		Window::Destroy();
+
 		if (this == s_Instance)
 		{
-			delete s_Instance;
+			s_Instance = nullptr;
 		}
 	}
 
@@ -53,5 +72,7 @@ namespace HSFramework
 	{
 		// TODO: Calculate delta time
 		m_ActiveManager->OnUpdate(0.0f);
+
+		Window::Update();
 	}
 }
