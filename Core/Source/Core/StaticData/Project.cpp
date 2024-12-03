@@ -40,7 +40,7 @@ namespace HSFramework
 			ActiveProject->MainWindowInfo.ySize = mainWindowInfo["ySize"].asInt();
 			ActiveProject->MainWindowInfo.Resizable = mainWindowInfo["Resizable"].asBool();
 			ActiveProject->MainWindowInfo.Fullscreen = mainWindowInfo["Fullscreen"].asBool();
-			ActiveProject->MainWindowInfo.vSync = mainWindowInfo["VSync"].asBool();
+			ActiveProject->MainWindowInfo.vSync = mainWindowInfo["vSync"].asBool();
 		}
 		if (root.isMember("SplashData"))
 		{

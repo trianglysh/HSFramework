@@ -58,6 +58,12 @@ namespace HSFramework
 			return false;
 		}
 
+		if (!s_Props.Fullscreen)
+		{
+			const GLFWvidmode* vmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+			glfwSetWindowPos(s_Handle, vmode->width / 14, vmode->height / 14);
+		}
+
 		glfwMakeContextCurrent(s_Handle);
 		SetVSync(s_Props.VSync); // Flush vSync value
 

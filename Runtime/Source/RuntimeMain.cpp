@@ -53,7 +53,7 @@ namespace HSFramework::Runtime
 				std::string pathStr = path.u8string();
 				if (!std::filesystem::is_symlink(path) && std::filesystem::is_regular_file(path) && strEndsWith(pathStr, ".hsproj.json"))
 				{
-					projectFilePath = pathStr;
+					projectFilePath = std::move(pathStr);
 					break;
 				}
 			}
