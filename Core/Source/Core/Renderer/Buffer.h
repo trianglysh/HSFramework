@@ -28,9 +28,9 @@ namespace HSFramework
 		{
 		}
 
-		uint8_t SizeOfShaderDataType(ShaderDataType type)
+		uint8_t GetComponentCount() const
 		{
-			switch (type)
+			switch (Type)
 			{
 			case ShaderDataType::Float:  return 1;
 			case ShaderDataType::Float2: return 2;
