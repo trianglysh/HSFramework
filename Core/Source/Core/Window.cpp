@@ -1,6 +1,7 @@
 #include "CorePCH.h"
 #include "Window.h"
 
+#include "Core/Renderer/Renderer.h"
 #include "Core/Application.h"
 
 #include <glad/glad.h>
@@ -77,6 +78,32 @@ namespace HSFramework
 			return false;
 		}
 
+		HS_CORE_INFO("OpenGL Info:");
+		HS_CORE_INFO("  Vendor       -> {}", (const char*) glGetString(GL_VENDOR));
+		HS_CORE_INFO("  Renderer     -> {}", (const char*) glGetString(GL_RENDERER));
+		HS_CORE_INFO("  Version      -> {}", (const char*) glGetString(GL_VERSION));
+		HS_CORE_INFO("  GLSL Version -> {}", (const char*) glGetString(GL_SHADING_LANGUAGE_VERSION));
+
+		if (GLVersion.major < 3 || (GLVersion.major == 3 && GLVersion.minor < 3))
+		{
+			HS_CORE_ERROR
+			(
+				"HSFramework requires a renderer (GPU/video card) with at least support for OpenGL 3.3!\n\n"
+				"Your current renderer ({}) only supports up to OpenGL {}.{}, which is too old for this game/application. "
+				"Either switch to a compatible renderer if such is available, or check if your current renderer has driver updates "
+				"that add support for newer OpenGL functionality.",
+
+				(const char*) glGetString(GL_RENDERER),
+				GLVersion.major,
+				GLVersion.minor
+			);
+
+			glfwDestroyWindow(s_Handle);
+			glfwTerminate();
+
+			return false;
+		}
+
 		glfwSetWindowCloseCallback(s_Handle, [](GLFWwindow* window)
 		{
 			Application::Get()->SetState(ManagementState::None);
@@ -86,6 +113,8 @@ namespace HSFramework
 		{
 			s_Props.Width = width;
 			s_Props.Height = height;
+
+			Renderer::SetViewport(0, 0, width, height);
 		});
 
 		HS_CORE_TRACE("Window creation successful!");

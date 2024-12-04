@@ -4,8 +4,12 @@
 #include "Core/StaticData/Project.h"
 #include "Core/Log.h"
 
+#include "Core/Renderer/Renderer.h"
+
 namespace HSFramework::Runtime
 {
+	bool LoadProject();
+
 	int RtMain(int argc, char** argv)
 	{
 		Log::Init();
@@ -74,8 +78,58 @@ namespace HSFramework::Runtime
 		Application application({ argv, argc });
 		application.SetState(ManagementState::Splash);
 
+		float vertices[] =
+		{
+			 0.5f,  0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			-0.5f, -0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
+		};
+
+		uint32_t indices[] =
+		{
+			0, 1, 3,
+			1, 2, 3
+		};
+
+		Ref<Shader> shader = MakeRef<Shader>
+		(
+			"TestShader",
+
+			"#version 330 core\n"
+			"layout (location = 0) in vec3 a_Position;\n"
+			"void main() {\n"
+			"	gl_Position = vec4(a_Position, 1.0);\n"
+			"}",
+
+			"#version 330 core\n"
+			"out vec4 FragColor;\n"
+			"void main() {\n"
+			"	FragColor = vec4(1.0, 1.0, 0.0, 1.0);\n"
+			"}"
+		);
+		shader->Bind();
+
+		Ref<VertexArray> vertexArray = MakeRef<VertexArray>();
+		vertexArray->Bind();
+
+		Ref<VertexBuffer> vertexBuffer = MakeRef<VertexBuffer>(vertices, (uint32_t) sizeof(vertices));
+		vertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" }
+		});
+
+		Ref<IndexBuffer> indexBuffer = MakeRef<IndexBuffer>(indices, 6);
+		indexBuffer->Bind();
+
+		vertexArray->AddVertexBuffer(vertexBuffer);
+		vertexArray->SetIndexBuffer(indexBuffer);
+
+		Renderer::SetClearColor({ 0.2f, 0.3f, 0.8f, 1.0f });
 		while (application.GetManagementState() != ManagementState::None)
 		{
+			Renderer::Clear();
+			Renderer::DrawIndexed(vertexArray);
+
 			application.Update();
 		}
 
